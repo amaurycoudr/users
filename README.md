@@ -12,7 +12,7 @@ docker version
 you can check if docker is already install with this command
 {% endhint %}
 
-Once you're strong enough, save the world:
+You also need to ask for the .**env file** \(this file must no be in the git repo\) .
 
 {% code title="hello.sh" %}
 ```bash
