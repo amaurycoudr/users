@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  api:
+    restart: always
+    build: ./backEnd
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    volumes:
+      - ./backEnd:/app
+      - ./backEnd/node_modules:/app/node_modules
+    env_file:
+      - .env
+  mongo:
+    image: mongo
+    volumes:
+      - ./database:/data/db
+    ports:
+      - "27017:27017"
