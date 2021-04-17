@@ -40,8 +40,6 @@ const checkNewUserValid = async (
   } else if (!isPasswordValid) {
     throw new Error(ERROR_INVALID_PASSWORD);
   } else if (!isUnique) {
-    console.log();
-
     throw new Error(ERROR_ALREADY_USE);
   }
 };
