@@ -1,7 +1,7 @@
 import { validate } from "email-validator";
 
-const checkUserNameLength = (userName: string | undefined) => {
-  return userName && userName.length > 4;
+const checkUserNameLength = (userName: string | undefined): Boolean => {
+  return Boolean(userName && userName.length > 4 && userName.length < 20);
 };
 const checkUserPassword = (password: string | undefined) => {
   if (!password || password.length < 6) {

@@ -7,10 +7,9 @@ const findUserByCredential = async (credential: string) => {
   const user = await (isEmail
     ? userModel.findOne({ email: credential })
     : userModel.findOne({ name: credential }));
-
   return user;
 };
-const createDBSignInUser = async (
+const createDBUser = async (
   email: string,
   name: string,
   password: string,
@@ -23,14 +22,12 @@ const createDBSignInUser = async (
       email,
       password,
       salt,
-      isSignUp: true,
       token,
     });
-
     return newUser;
   } catch (e) {
     throw new Error(ERROR_CALL_DATABASE);
   }
 };
 
-export { findUserByCredential, createDBSignInUser };
+export { findUserByCredential, createDBUser };

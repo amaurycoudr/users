@@ -7,7 +7,7 @@ import {
   ERROR_MISSING_FILED,
 } from "../../error/errorMessage";
 import {
-  createDBSignInUser,
+  createDBUser,
   findUserByCredential,
 } from "../userDB/userDBInteraction";
 import {
@@ -58,12 +58,11 @@ const createUser = async (
   const { hashPassword, salt } = passwordUtils.hashSaltPassword(
     newUserPassword!
   );
-  console.log(process.env.JWT_KEY);
   const token = jwt.sign(
     { name: newUserName, email: newUserName },
     process.env.JWT_KEY!
   );
-  const newUser = await createDBSignInUser(
+  const newUser = await createDBUser(
     newUserEmail!,
     userName,
     hashPassword,

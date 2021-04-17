@@ -21,4 +21,5 @@ const isPasswordValid = (
 export default {
   hashSaltPassword,
   isPasswordValid,
+  hash
 };

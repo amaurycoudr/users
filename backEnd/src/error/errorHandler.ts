@@ -12,28 +12,26 @@ import {
 } from "./errorMessage";
 
 const errorStatusMessage = (message: ErrorMessage) => {
-  switch (message) {
-    case ERROR_MISSING_FILED:
-      return { status: 400, errorMessage: "a field has not been filled" };
-    case ERROR_INVALID_EMAIL:
-      return { status: 400, errorMessage: "invalid email" };
-    case ERROR_INVALID_NAME:
-      return { status: 400, errorMessage: "invalid username" };
-    case ERROR_INVALID_PASSWORD:
-      return { status: 400, errorMessage: "invalid password" };
-    case ERROR_ALREADY_USE:
-      return { status: 400, errorMessage: "email / name already used" };
-    case ERROR_BAD_EMAIL_NAME:
-      return { status: 400, errorMessage: "unknown user" };
-    case ERROR_BAD_PASSWORD:
-      return { status: 400, errorMessage: "bad password" };
-    case ERROR_CALL_DATABASE:
-    default:
-      return {
-        status: 500,
-        errorMessage: "something unexpected goes wrong retry later",
-      };
-  }
+  const errors = {
+    [ERROR_MISSING_FILED]: {
+      status: 400,
+      errorMessage: "a field has not been filled",
+    },
+    [ERROR_INVALID_EMAIL]: { status: 400, errorMessage: "invalid email" },
+    [ERROR_INVALID_NAME]: { status: 400, errorMessage: "invalid username" },
+    [ERROR_INVALID_PASSWORD]: { status: 400, errorMessage: "invalid password" },
+    [ERROR_ALREADY_USE]: {
+      status: 400,
+      errorMessage: "email / name already used",
+    },
+    [ERROR_BAD_EMAIL_NAME]: { status: 400, errorMessage: "unknown user" },
+    [ERROR_BAD_PASSWORD]: { status: 400, errorMessage: "bad password" },
+    [ERROR_CALL_DATABASE]: {
+      status: 500,
+      errorMessage: "something unexpected goes wrong retry later",
+    },
+  };
+  return errors[message] || errors[ERROR_CALL_DATABASE];
 };
 
 const errorHandler = (e: Error, res: Response) => {
