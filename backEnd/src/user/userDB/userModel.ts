@@ -14,10 +14,10 @@ interface UserModel extends Model<UserDocument> {}
 const userSchema = new Schema<UserDocument, UserModel>({
   name: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
-  salt: { type: String, required: true },
-  password: { type: String, required: true },
-  token: { type: String, required: true },
+  salt: { type: String, required: true, unique: true },
+  password: { type: String, required: true, unique: true },
+  token: { type: String, required: true, unique: true },
 });
-const userModel = model<UserDocument, UserModel>("User", userSchema);
+const User = model<UserDocument, UserModel>("User", userSchema);
 
-export default userModel;
+export default User;

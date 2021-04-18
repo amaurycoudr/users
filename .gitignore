@@ -1,4 +1,5 @@
 node_modules/
 backEnd/dist/*
+coverage/
 database/
 .env

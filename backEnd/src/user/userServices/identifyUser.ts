@@ -5,9 +5,9 @@ import {
 import { findUserByCredential } from "../userDB/userDBInteraction";
 import { name as nameUtils, password as passwordUtils } from "../userUtils";
 
-const identifyUser = async (identifier: string, password: string) => {
+const identifyUser = async (credential: string, password: string) => {
   const user = await findUserByCredential(
-    nameUtils.reformatUserName(identifier)
+    nameUtils.reformatUserName(credential)
   );
   if (!user) {
     throw new Error(ERROR_BAD_EMAIL_NAME);

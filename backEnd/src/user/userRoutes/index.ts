@@ -4,6 +4,6 @@ import { userSignIn, userSignUp } from "../userControllers";
 const userRoutes = Router();
 
 userRoutes.post("", userSignUp);
-userRoutes.post("/me", userSignIn);
+userRoutes.post("/login", userSignIn);
 
 export default userRoutes;

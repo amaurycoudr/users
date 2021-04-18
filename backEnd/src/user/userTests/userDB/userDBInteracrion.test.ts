@@ -1,14 +1,19 @@
-import mongoose from "mongoose";
 import { ERROR_CALL_DATABASE } from "../../../error/errorMessage";
 import {
   createDBUser,
   findUserByCredential,
 } from "../../userDB/userDBInteraction";
 import { UserDocument, UserType } from "../../userDB/userModel";
-const createUser = (user: UserType) =>
-  createDBUser(user.email, user.name, user.password, user.salt, user.token);
+import userTestSetUp from "../userTestSetUp";
+const createDBUserTest = async (user: UserType) =>
+  await createDBUser(
+    user.email,
+    user.name,
+    user.password,
+    user.salt,
+    user.token
+  );
 const checkSameUser = (user1: UserType, user2: UserDocument) => {
-  expect(user1.token).toBe(user2.token);
   expect(user1.name).toBe(user2.name);
   expect(user1.salt).toBe(user2.salt);
   expect(user1.email).toBe(user2.email);
@@ -43,47 +48,17 @@ const badUserTest: UserType = {
   salt: "lkncenklan",
   token: "leTokenenfaite",
 };
-beforeEach((done) => {
-  mongoose.connect(
-    "mongodb://mongo:27017/JestDB",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-    () => done()
-  );
-});
-afterEach((done) => {
-  mongoose.connection.db.dropDatabase(() => {
-    mongoose.connection.close(() => done());
-  });
-});
+userTestSetUp();
 
 describe("Check if createDBUser works as intended", () => {
   test("create a user as expected", () => {
-    expect.assertions(1);
-    return createUser(userTest1).then((user) => {
+    return createDBUserTest(userTest1).then((user) => {
       checkSameUser(userTest1, user);
     });
   });
   test("throw an error when an argument is missing", () => {
     expect.assertions(1);
-    return createUser(badUserTest).catch((error: Error) => {
-      expect(error.message).toBe(ERROR_CALL_DATABASE);
-    });
-  });
-  beforeEach(async () => {
-    await createUser(userTest1);
-  });
-  test("throw an error when an email already exist in the DB ", () => {
-    expect.assertions(1);
-    return createUser(userTest2).catch((error: Error) => {
-      expect(error.message).toBe(ERROR_CALL_DATABASE);
-    });
-  });
-  test("throw an error when an name already exist in the DB ", () => {
-    expect.assertions(1);
-    return createUser(userTest3).catch((error: Error) => {
+    return createDBUserTest(badUserTest).catch((error: Error) => {
       expect(error.message).toBe(ERROR_CALL_DATABASE);
     });
   });
@@ -91,23 +66,28 @@ describe("Check if createDBUser works as intended", () => {
 
 describe("Check if findUserByCredential works as intended", () => {
   beforeEach(async () => {
-    await createUser(userTest1);
+    await createDBUserTest(userTest1);
   });
-  test("return the user when we the good email is give ", () => {
-    expect.assertions(5);
-    return findUserByCredential(userTest1.email).then((user) => {
+  test("return the user when we the good email is give ", async () => {
+    expect.assertions(4);
+    try {
+      const user = await findUserByCredential(userTest1.email);
       checkSameUser(userTest1, user!);
-    });
+    } catch (error) {
+      console.log(error);
+    }
   });
-  test("return the user when we the good name is give ", () => {
-    expect.assertions(5);
-    return findUserByCredential(userTest1.name).then((user) => {
+  test("return the user when we the good name is give ", async () => {
+    expect.assertions(4);
+    try {
+      const user = await findUserByCredential(userTest1.name);
       checkSameUser(userTest1, user!);
-    });
+    } catch (error) {
+      console.log(error);
+    }
   });
   test("return null when we no user correspond ", () => {
-    expect.assertions(5);
-    return findUserByCredential("njkl kjcna ekjn").then((user) => {
+    return findUserByCredential(userTest1.name).then((user) => {
       expect(user).toBeNull;
     });
   });

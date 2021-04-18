@@ -1,12 +1,12 @@
 import { validate } from "email-validator";
 import { ERROR_CALL_DATABASE } from "../../error/errorMessage";
-import userModel from "./userModel";
+import User from "./userModel";
 
 const findUserByCredential = async (credential: string) => {
   const isEmail = validate(credential);
   const user = await (isEmail
-    ? userModel.findOne({ email: credential })
-    : userModel.findOne({ name: credential }));
+    ? User.findOne({ email: credential })
+    : User.findOne({ name: credential }));
   return user;
 };
 const createDBUser = async (
@@ -17,7 +17,7 @@ const createDBUser = async (
   token: string
 ) => {
   try {
-    const newUser = await userModel.create({
+    const newUser = await User.create({
       name,
       email,
       password,

@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "test": "jest --coverage --verbose",
+    "test": "jest --coverage --verbose --detectOpenHandles",
     "dev": "nodemon src/server.ts",
     "start": "tsc"
   },
