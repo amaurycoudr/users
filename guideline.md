@@ -39,7 +39,8 @@ Currently the project follow this structure :
 * **servicesMiddlewares** same behavior as controllers but only call **next** and doesn't send a **res**  a middlewares is used by other controllers from the same or another service
 * **servicesDB** handle db **models** et and db **interactions** for a service
 * **servicesServices** interface between **controllers** and **db.** Here is all the **business logic**. But doesn't manipulate any db object or express objet like req, res 
-* **servicesTest** all the tests for a services. Contains sub folder that  
+* **servicesTest** all the tests for a services. Contains sub folder for each part of the service \(routes, controllers, dB...\)
+* **servicesUtils** here we define some useful functions like checkers...  
 
 
 
