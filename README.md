@@ -4,15 +4,15 @@
 
  - If you want to install the project you **must have docker install** on your computer. Check [docker](https://docs.docker.com/get-docker/) documentation for more informations.
 
+{% hint style="info" %}
+you can check if docker is already install with this command :
+{% endhint %}
+
 ```bash
 docker version
 ```
 
-{% hint style="info" %}
-you can check if docker is already install with this command
-{% endhint %}
-
- - You also need to ask for the .**env file** \(this file must no be in the git repo\). 
+  - You also need to ask for the .**env file** \(this file must no be in the git repo\). 
 
 Now you can run this command :
 
@@ -30,5 +30,12 @@ docker-compose run
 
 
 
+## Add an npm package to the project 
 
+If you want to add a new package to the project you need to run :
+
+```text
+docker-compose exec -it ${container-name} npm install ${package-name}
+
+```
 
