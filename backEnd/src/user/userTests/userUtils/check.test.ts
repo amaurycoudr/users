@@ -34,6 +34,11 @@ const checkersTested = [
     cases: [
       { functionArgument: "aze@mail", isValid: false, condition: "BAD FORMAT" },
       { functionArgument: "amaury@mail.fr", isValid: true },
+      {
+        functionArgument:
+          "amauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamauryamaury@mail.fr",
+        isValid: false,
+      },
     ],
   },
 ];

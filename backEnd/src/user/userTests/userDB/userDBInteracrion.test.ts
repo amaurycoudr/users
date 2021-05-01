@@ -3,9 +3,9 @@ import {
   createDBUser,
   findUserByCredential,
 } from "../../userDB/userDBInteraction";
-import { UserDocument, UserType } from "../../userDB/userModel";
+import User, { UserAttributes } from "../../userDB/userModel";
 import userTestSetUp from "../userTestSetUp";
-const createDBUserTest = async (user: UserType) =>
+const createDBUserTest = async (user: UserAttributes) =>
   await createDBUser(
     user.email,
     user.name,
@@ -13,27 +13,30 @@ const createDBUserTest = async (user: UserType) =>
     user.salt,
     user.token
   );
-const checkSameUser = (user1: UserType, user2: UserDocument) => {
+const checkSameUser = (user1: UserAttributes, user2: User) => {
   expect(user1.name).toBe(user2.name);
   expect(user1.salt).toBe(user2.salt);
   expect(user1.email).toBe(user2.email);
   expect(user1.password).toBe(user2.password);
 };
-const userTest1: UserType = {
+const userTest1: UserAttributes = {
+  id: 1,
   email: "amaury@mail.com",
   name: "test",
   password: "paskmc#1",
   salt: "lkncenklan",
   token: "leTokenenfaite",
 };
-const userTest2: UserType = {
+const userTest2: UserAttributes = {
+  id: 1,
   email: "amaury@mail.com",
   name: "tessst",
   password: "pasksmc#1",
   salt: "lkncenklsan",
   token: "leTosksenenfaite",
 };
-const userTest3: UserType = {
+const userTest3: UserAttributes = {
+  id: 1,
   email: "amadsury@mail.com",
   name: "test",
   password: "paskmc#1",
@@ -41,7 +44,8 @@ const userTest3: UserType = {
   token: "leTokenenfaite",
 };
 
-const badUserTest: UserType = {
+const badUserTest: UserAttributes = {
+  id: 1,
   email: "amaury@mail.com",
   name: "test",
   password: undefined as any,

@@ -1,21 +1,18 @@
-import mongoose from "mongoose";
-import userDB from "../userDB";
+import { Sequelize } from "sequelize";
+import db from "../../db";
 
 const userTestSetUp = () => {
+  let sequelize: Sequelize;
   beforeAll(async () => {
-    await mongoose.connect("mongodb://mongo:27017/JestDB", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    });
+    sequelize = db.sequelize;
+    await db.checkConnection(sequelize);
   });
-  afterEach(async () => {
-    await userDB.User.deleteMany();
+  beforeEach(async () => {
+    await sequelize.sync({ force: true });
   });
 
   afterAll(async () => {
-    await mongoose.connection.db.dropDatabase();
-    await mongoose.connection.close();
+    await sequelize.close();
   });
 };
 

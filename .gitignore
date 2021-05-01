@@ -1,6 +1,6 @@
 node_modules/
-backEnd/dist/*
+backEnd/dist
 backEnd/coverage/
 coverage/
 database/
-.env
+.env*

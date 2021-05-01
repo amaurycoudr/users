@@ -31,6 +31,7 @@ describe("Check if createUser works as intended", () => {
       console.log(error);
     }
   });
+
   test("throw an error when an argument is missing", async () => {
     expect.assertions(1);
     try {
@@ -39,6 +40,7 @@ describe("Check if createUser works as intended", () => {
       expect(error.message).toMatch(ERROR_MISSING_FILED);
     }
   });
+
   test("throw an error when name is empty", async () => {
     expect.assertions(1);
     try {
@@ -73,10 +75,12 @@ describe("Check if createUser works as intended", () => {
       expect(error.message).toMatch(ERROR_INVALID_PASSWORD);
     }
   });
+
   describe("", () => {
     beforeEach(async () => {
       await createUser(userTest.email, userTest.name, userTest.password);
     });
+
     test("throw an error when email already exist", async () => {
       expect.assertions(1);
       try {

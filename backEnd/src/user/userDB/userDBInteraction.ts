@@ -5,8 +5,8 @@ import User from "./userModel";
 const findUserByCredential = async (credential: string) => {
   const isEmail = validate(credential);
   const user = await (isEmail
-    ? User.findOne({ email: credential })
-    : User.findOne({ name: credential }));
+    ? User.findOne({ where: { email: credential } })
+    : User.findOne({ where: { name: credential } }));
   return user;
 };
 const createDBUser = async (
