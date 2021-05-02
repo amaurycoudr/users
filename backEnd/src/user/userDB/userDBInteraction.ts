@@ -1,5 +1,5 @@
 import { validate } from "email-validator";
-import { ERROR_CALL_DATABASE } from "../../error/errorMessage";
+import { ERROR_UNEXPECTED } from "../../error/errorMessage";
 import User from "./userModel";
 
 const findUserByCredential = async (credential: string) => {
@@ -26,7 +26,7 @@ const createDBUser = async (
     });
     return newUser;
   } catch (e) {
-    throw new Error(ERROR_CALL_DATABASE);
+    throw new Error(ERROR_UNEXPECTED);
   }
 };
 

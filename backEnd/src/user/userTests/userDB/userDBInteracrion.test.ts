@@ -1,4 +1,4 @@
-import { ERROR_CALL_DATABASE } from "../../../error/errorMessage";
+import { ERROR_UNEXPECTED } from "../../../error/errorMessage";
 import {
   createDBUser,
   findUserByCredential,
@@ -27,22 +27,6 @@ const userTest1: UserAttributes = {
   salt: "lkncenklan",
   token: "leTokenenfaite",
 };
-const userTest2: UserAttributes = {
-  id: 1,
-  email: "amaury@mail.com",
-  name: "tessst",
-  password: "pasksmc#1",
-  salt: "lkncenklsan",
-  token: "leTosksenenfaite",
-};
-const userTest3: UserAttributes = {
-  id: 1,
-  email: "amadsury@mail.com",
-  name: "test",
-  password: "paskmc#1",
-  salt: "lkncenklan",
-  token: "leTokenenfaite",
-};
 
 const badUserTest: UserAttributes = {
   id: 1,
@@ -63,7 +47,7 @@ describe("Check if createDBUser works as intended", () => {
   test("throw an error when an argument is missing", () => {
     expect.assertions(1);
     return createDBUserTest(badUserTest).catch((error: Error) => {
-      expect(error.message).toBe(ERROR_CALL_DATABASE);
+      expect(error.message).toBe(ERROR_UNEXPECTED);
     });
   });
 });
@@ -73,22 +57,12 @@ describe("Check if findUserByCredential works as intended", () => {
     await createDBUserTest(userTest1);
   });
   test("return the user when we the good email is give ", async () => {
-    expect.assertions(4);
-    try {
-      const user = await findUserByCredential(userTest1.email);
-      checkSameUser(userTest1, user!);
-    } catch (error) {
-      console.log(error);
-    }
+    const user = await findUserByCredential(userTest1.email);
+    checkSameUser(userTest1, user!);
   });
   test("return the user when we the good name is give ", async () => {
-    expect.assertions(4);
-    try {
-      const user = await findUserByCredential(userTest1.name);
-      checkSameUser(userTest1, user!);
-    } catch (error) {
-      console.log(error);
-    }
+    const user = await findUserByCredential(userTest1.name);
+    checkSameUser(userTest1, user!);
   });
   test("return null when we no user correspond ", () => {
     return findUserByCredential(userTest1.name).then((user) => {

@@ -1,3 +1,4 @@
 import createUser from "./createUser";
-import identifyUser from "./identifyUser";
-export { createUser, identifyUser };
+import signInUser from "./signInUser";
+import availableUser from "./availableUser";
+export { createUser, signInUser, availableUser };

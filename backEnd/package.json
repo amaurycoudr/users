@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "test": "jest --coverage --verbose --detectOpenHandles",
+    "test": "jest --no-cache --coverage --verbose --detectOpenHandles",
     "dev": "nodemon src/server.ts",
     "start": "tsc"
   },
@@ -12,7 +12,8 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/db/"
+      "/db.ts",
+      "/error"
     ],
     "collectCoverage": false,
     "modulePathIgnorePatterns": [

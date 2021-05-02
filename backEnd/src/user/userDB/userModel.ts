@@ -8,6 +8,7 @@ export interface UserAttributes {
   password: string;
   salt: string;
   token: string;
+  isAdmin?: boolean;
 }
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
 
@@ -22,12 +23,12 @@ class User
   password!: string;
   salt!: string;
   token!: string;
+  isAdmin!: boolean;
 }
 User.init(
   {
     id: {
       type: DataTypes.INTEGER,
-
       autoIncrement: true,
       primaryKey: true,
     },
@@ -36,6 +37,7 @@ User.init(
     salt: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     token: { type: DataTypes.STRING, allowNull: false },
+    isAdmin: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
   },
   { sequelize, modelName: "user" }
 );

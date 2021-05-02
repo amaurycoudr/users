@@ -16,8 +16,6 @@ const sequelize = new Sequelize(
 
 const checkConnection = async (sequelize: Sequelize) => {
   try {
-    console.log(NODE_ENV, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB);
-
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
   } catch (error) {

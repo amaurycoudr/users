@@ -16,20 +16,15 @@ const userTest = {
 userTestSetUp();
 describe("Check if createUser works as intended", () => {
   test("create a user when arguments are good", async () => {
-    expect.assertions(4);
-    try {
-      const user = await createUser(
-        userTest.email,
-        userTest.name,
-        userTest.password
-      );
-      expect(user.name).toMatch(userTest.name);
-      expect(user.email).toMatch(userTest.email);
-      expect(user.token).toBeTruthy();
-      expect(user.id).toBeTruthy();
-    } catch (error) {
-      console.log(error);
-    }
+    const user = await createUser(
+      userTest.email,
+      userTest.name,
+      userTest.password
+    );
+    expect(user.name).toMatch(userTest.name);
+    expect(user.email).toMatch(userTest.email);
+    expect(user.token).toBeTruthy();
+    expect(user.id).toBeTruthy();
   });
 
   test("throw an error when an argument is missing", async () => {

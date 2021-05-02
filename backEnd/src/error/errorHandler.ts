@@ -4,7 +4,7 @@ import {
   ERROR_ALREADY_USE,
   ERROR_BAD_EMAIL_NAME,
   ERROR_BAD_PASSWORD,
-  ERROR_CALL_DATABASE,
+  ERROR_UNEXPECTED,
   ERROR_INVALID_EMAIL,
   ERROR_INVALID_NAME,
   ERROR_INVALID_PASSWORD,
@@ -17,21 +17,21 @@ export const errorStatusMessage = (message: ErrorType) => {
       status: 400,
       error: "a field has not been filled",
     },
-    [ERROR_INVALID_EMAIL]: { status: 400, error: "invalid email" },
-    [ERROR_INVALID_NAME]: { status: 400, error: "invalid username" },
-    [ERROR_INVALID_PASSWORD]: { status: 400, error: "invalid password" },
+    [ERROR_INVALID_EMAIL]: { status: 400, error: "invalidEmail" },
+    [ERROR_INVALID_NAME]: { status: 400, error: "invalidUsername" },
+    [ERROR_INVALID_PASSWORD]: { status: 400, error: "invalidPassword" },
     [ERROR_ALREADY_USE]: {
       status: 400,
-      error: "email / name already used",
+      error: "identifierAlreadyUsed",
     },
-    [ERROR_BAD_EMAIL_NAME]: { status: 400, error: "unknown user" },
-    [ERROR_BAD_PASSWORD]: { status: 400, error: "bad password" },
-    [ERROR_CALL_DATABASE]: {
+    [ERROR_BAD_EMAIL_NAME]: { status: 404, error: "unknownUser" },
+    [ERROR_BAD_PASSWORD]: { status: 400, error: "badPassword" },
+    [ERROR_UNEXPECTED]: {
       status: 500,
-      error: "something unexpected goes wrong retry later",
+      error: "Unexpected",
     },
   };
-  return errors[message] || errors[ERROR_CALL_DATABASE];
+  return errors[message] || errors[ERROR_UNEXPECTED];
 };
 
 const errorHandler = (e: Error, res: Response) => {

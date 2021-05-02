@@ -5,7 +5,7 @@ import {
 import { findUserByCredential } from "../userDB/userDBInteraction";
 import { name as nameUtils, password as passwordUtils } from "../userUtils";
 
-const identifyUser = async (credential: string, password: string) => {
+const signInUser = async (credential: string, password: string) => {
   const user = await findUserByCredential(
     nameUtils.reformatUserName(credential)
   );
@@ -23,4 +23,4 @@ const identifyUser = async (credential: string, password: string) => {
   return user.token;
 };
 
-export default identifyUser;
+export default signInUser;

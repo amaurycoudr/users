@@ -1,4 +1,4 @@
-import { createUser, identifyUser } from "../../userServices";
+import { createUser, signInUser } from "../../userServices";
 
 import {
   ERROR_BAD_EMAIL_NAME,
@@ -23,18 +23,13 @@ describe("Check if identifyUser works as intended", () => {
     userToken = token;
   });
   test("return token if good password and userName is provide", async () => {
-    expect.assertions(1);
-    try {
-      const token = await identifyUser(userTest.name, userTest.password);
-      expect(token).toBe(userToken);
-    } catch (error) {
-      console.log(error);
-    }
+    const token = await signInUser(userTest.name, userTest.password);
+    expect(token).toBe(userToken);
   });
   test("throw an error when user doesn't exist", async () => {
     expect.assertions(1);
     try {
-      await identifyUser("userTest.name", userTest.password);
+      await signInUser("userTest.name", userTest.password);
     } catch (error) {
       expect(error.message).toBe(ERROR_BAD_EMAIL_NAME);
     }
@@ -42,7 +37,7 @@ describe("Check if identifyUser works as intended", () => {
   test("throw an error when the password is wrong", async () => {
     expect.assertions(1);
     try {
-      await identifyUser(userTest.name, " userTest.password");
+      await signInUser(userTest.name, " userTest.password");
     } catch (error) {
       expect(error.message).toBe(ERROR_BAD_PASSWORD);
     }
