@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import {
   ERROR_ALREADY_USE,
   ERROR_INVALID_EMAIL,
@@ -56,18 +55,14 @@ const createUser = async (
   const { hashPassword, salt } = passwordUtils.hashSaltPassword(
     newUserPassword!
   );
-  const token = jwt.sign(
-    { name: newUserName, email: newUserName },
-    process.env.JWT_KEY!
-  );
   const newUser = await createDBUser(
     newUserEmail!,
     userName,
     hashPassword,
-    salt,
-    token
+    salt
   );
   const { name, email, id } = newUser;
+  const token = passwordUtils.createToken(id);
 
   return { name, email, id, token };
 };

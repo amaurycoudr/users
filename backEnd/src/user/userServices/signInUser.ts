@@ -20,7 +20,7 @@ const signInUser = async (credential: string, password: string) => {
   if (!isGoodPassword) {
     throw new Error(ERROR_BAD_PASSWORD);
   }
-  return user.token;
+  return passwordUtils.createToken(user.id);
 };
 
 export default signInUser;

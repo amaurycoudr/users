@@ -9,12 +9,15 @@ const findUserByCredential = async (credential: string) => {
     : User.findOne({ where: { name: credential } }));
   return user;
 };
+const findUserById = async (id: number) => {
+  const user = await User.findByPk(id);
+  return user;
+};
 const createDBUser = async (
   email: string,
   name: string,
   password: string,
-  salt: string,
-  token: string
+  salt: string
 ) => {
   try {
     const newUser = await User.create({
@@ -22,7 +25,6 @@ const createDBUser = async (
       email,
       password,
       salt,
-      token,
     });
     return newUser;
   } catch (e) {
@@ -30,4 +32,4 @@ const createDBUser = async (
   }
 };
 
-export { findUserByCredential, createDBUser };
+export { findUserByCredential, createDBUser, findUserById };

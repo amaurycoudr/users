@@ -7,7 +7,7 @@ export interface UserAttributes {
   email: string;
   password: string;
   salt: string;
-  token: string;
+
   isAdmin?: boolean;
 }
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
@@ -22,7 +22,6 @@ class User
   email!: string;
   password!: string;
   salt!: string;
-  token!: string;
   isAdmin!: boolean;
 }
 User.init(
@@ -36,7 +35,6 @@ User.init(
     email: { type: DataTypes.STRING, allowNull: false },
     salt: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
-    token: { type: DataTypes.STRING, allowNull: false },
     isAdmin: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
   },
   { sequelize, modelName: "user" }

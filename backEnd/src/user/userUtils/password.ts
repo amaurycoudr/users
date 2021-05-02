@@ -1,5 +1,7 @@
 import crypto from "crypto";
 import csprng from "csprng";
+import jwt from "jsonwebtoken";
+
 const hash = (pwd: string) => {
   return crypto.createHash("sha256").update(pwd).digest("base64");
 };
@@ -18,8 +20,15 @@ const isPasswordValid = (
   return hashPassword === hashPasswordGuess;
 };
 
+export interface tokenInfo {
+  id: number;
+}
+const createToken = (id: number) => {
+  return jwt.sign({ id }, process.env.JWT_KEY!);
+};
 export default {
   hashSaltPassword,
   isPasswordValid,
-  hash
+  hash,
+  createToken,
 };

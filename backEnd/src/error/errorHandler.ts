@@ -9,13 +9,14 @@ import {
   ERROR_INVALID_NAME,
   ERROR_INVALID_PASSWORD,
   ERROR_MISSING_FILED,
+  ERROR_BAD_TOKEN,
 } from "./errorMessage";
 
 export const errorStatusMessage = (message: ErrorType) => {
   const errors = {
     [ERROR_MISSING_FILED]: {
       status: 400,
-      error: "a field has not been filled",
+      error: "fieldNotFilled",
     },
     [ERROR_INVALID_EMAIL]: { status: 400, error: "invalidEmail" },
     [ERROR_INVALID_NAME]: { status: 400, error: "invalidUsername" },
@@ -30,6 +31,7 @@ export const errorStatusMessage = (message: ErrorType) => {
       status: 500,
       error: "Unexpected",
     },
+    [ERROR_BAD_TOKEN]: { status: 404, error: "badToken" },
   };
   return errors[message] || errors[ERROR_UNEXPECTED];
 };
