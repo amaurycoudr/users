@@ -152,7 +152,7 @@ email or username
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-return if the name or the email is disponible 
+return if the name or the email is available 
 {% endapi-method-response-example-description %}
 
 ```
