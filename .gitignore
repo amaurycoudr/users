@@ -1,6 +1,8 @@
 node_modules/
 backEnd/dist
 backEnd/coverage/
+backEnd/src/lcov-report
 coverage/
 database/
 .env*
+

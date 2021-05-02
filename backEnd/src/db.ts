@@ -1,28 +1,23 @@
 import { Sequelize } from "sequelize";
 
-const {
-  POSTGRES_HOST,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_DB,
-  POSTGRES_TEST_HOST,
-  NODE_ENV,
-} = process.env;
+const { NODE_ENV, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
 
 const sequelize = new Sequelize(
   POSTGRES_DB!,
   POSTGRES_USER!,
   POSTGRES_PASSWORD!,
   {
+    host: NODE_ENV === "test" ? "db-test" : "db",
     dialect: "postgres",
-    host: NODE_ENV === "test" ? POSTGRES_TEST_HOST : POSTGRES_HOST,
-    port: NODE_ENV === "test" ? 5430 : 5432,
-    logging: NODE_ENV === "test" ? false : false,
+    port: 5432,
+    logging: false,
   }
 );
 
 const checkConnection = async (sequelize: Sequelize) => {
   try {
+    console.log(NODE_ENV, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB);
+
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
   } catch (error) {
