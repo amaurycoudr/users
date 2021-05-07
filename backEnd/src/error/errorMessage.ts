@@ -1,5 +1,7 @@
 export const ERROR_MISSING_FILED = "missing_filed";
 export const ERROR_BAD_TOKEN = "bad_token";
+export const ERROR_BAD_ID = "bad_id";
+export const ERROR_UNAUTHORIZED = "unauthorized";
 export const ERROR_INVALID_EMAIL = "invalid_email";
 export const ERROR_INVALID_NAME = "invalid_name";
 export const ERROR_INVALID_PASSWORD = "invalid_password";
@@ -17,4 +19,5 @@ export type ErrorType =
   | typeof ERROR_UNEXPECTED
   | typeof ERROR_BAD_PASSWORD
   | typeof ERROR_BAD_TOKEN
-  | typeof ERROR_BAD_EMAIL_NAME;
+  | typeof ERROR_BAD_EMAIL_NAME
+  | typeof ERROR_UNAUTHORIZED;

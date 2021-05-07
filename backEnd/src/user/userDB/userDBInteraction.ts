@@ -1,6 +1,6 @@
 import { validate } from "email-validator";
 import { ERROR_UNEXPECTED } from "../../error/errorMessage";
-import User from "./userModel";
+import User, { UserDBEdit } from "./userModel";
 
 const findUserByCredential = async (credential: string) => {
   const isEmail = validate(credential);
@@ -31,5 +31,15 @@ const createDBUser = async (
     throw new Error(ERROR_UNEXPECTED);
   }
 };
+const editDBUser = async (user: User, edit: UserDBEdit) => {
+  try {
+    user.update(edit);
+    return user;
+  } catch (error) {
+    console.log(error);
 
-export { findUserByCredential, createDBUser, findUserById };
+    throw new Error(ERROR_UNEXPECTED);
+  }
+};
+
+export { findUserByCredential, createDBUser, findUserById, editDBUser };

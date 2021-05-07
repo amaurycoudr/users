@@ -7,9 +7,20 @@ export interface UserAttributes {
   email: string;
   password: string;
   salt: string;
-
   isAdmin?: boolean;
 }
+export type UserRequestEdit = {
+  name?: string;
+  email?: string;
+  password?: string;
+};
+export type UserDBEdit = {
+  name?: string;
+  email?: string;
+  password?: string;
+  salt?: string;
+};
+export type UserElement = "email" | "name" | "password";
 interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
 
 const sequelize = db.sequelize;

@@ -10,6 +10,8 @@ import {
   ERROR_INVALID_PASSWORD,
   ERROR_MISSING_FILED,
   ERROR_BAD_TOKEN,
+  ERROR_BAD_ID,
+  ERROR_UNAUTHORIZED,
 } from "./errorMessage";
 
 export const errorStatusMessage = (message: ErrorType) => {
@@ -32,6 +34,8 @@ export const errorStatusMessage = (message: ErrorType) => {
       error: "Unexpected",
     },
     [ERROR_BAD_TOKEN]: { status: 404, error: "badToken" },
+    [ERROR_BAD_ID]: { status: 400, error: "badId" },
+    [ERROR_UNAUTHORIZED]: { status: 400, error: "unauthorized" },
   };
   return errors[message] || errors[ERROR_UNEXPECTED];
 };

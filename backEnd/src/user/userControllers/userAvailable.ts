@@ -7,7 +7,6 @@ const userAvailable = async (
   next: NextFunction
 ) => {
   const identifier = req.body.identifier;
-
   try {
     const result = await availableUser(identifier);
     res.send({ available: result });
